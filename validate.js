@@ -6,6 +6,7 @@ function isname(){
   if(regex.test(name_x))
   {
       document.getElementById("namee").innerHTML=""
+      document.getElementById("submitb").style.visibility="visible"
   }
   else{
       document.getElementById("namee").innerHTML= "<i>Please Enter Characters</i>"
@@ -20,9 +21,11 @@ function isname(){
   if(regex.test(mail_x))
   {
       document.getElementById("emaill").innerHTML=""
+      document.getElementById("submitb").style.visibility="visible"
   }
   else{
       document.getElementById("emaill").innerHTML= "<i>Enter Valid mail</i>"
+      document.getElementById("submitb").style.visibility="hidden"
   }
 }
 
@@ -37,6 +40,7 @@ function isphone(){
   if(regex.test(number) &&result!= null)
   {
       document.getElementById("phonee").innerHTML=""
+      document.getElementById("submitb").style.visibility="visible"
   }
   else{
       document.getElementById("phonee").innerHTML= "<i>Enter Valid Mobile</i>"
