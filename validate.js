@@ -1,17 +1,25 @@
+let nameVal;
+let emailVal;
+let subjectVal;
+let msgVal;
+let mobVal;
 function isname(){
     console.log("name validated")
+    console.log(nameVal+"namval")
   let name_x=document.getElementById("name").value
   let regex = /^[a-zA-Z ]{2,30}$/;
   
   if(regex.test(name_x))
   {
       document.getElementById("namee").innerHTML=""
-      document.getElementById("submitb").style.visibility="visible"
+      nameVal=true;
   }
   else{
-      document.getElementById("namee").innerHTML= "<i>Please Enter Characters</i>"
-      document.getElementById("submitb").style.visibility="hidden"
+      document.getElementById("namee").innerHTML= "Please Enter Characters"
+      nameVal=false;
   }
+  
+   
 }
 
   function isEmail(){
@@ -21,47 +29,87 @@ function isname(){
   if(regex.test(mail_x))
   {
       document.getElementById("emaill").innerHTML=""
-      document.getElementById("submitb").style.visibility="visible"
+      emailVal=true;
   }
   else{
       document.getElementById("emaill").innerHTML= "<i>Enter Valid mail</i>"
-      document.getElementById("submitb").style.visibility="hidden"
+      emailVal=false;
   }
+}
+
+function issubject(){
+    let subject = document.getElementById("subject").value
+    let lengthh = subject.length;
+    console.log(lengthh);
+    if(lengthh<3){
+        document.getElementById("subjectt").innerHTML= "<i>Enter a subject</i>"
+        subjectVal=false;
+    }
+    else{
+        subjectVal=true;
+        document.getElementById("subjectt").innerHTML=""
+    }
+}
+function ismessage(){
+    let message = document.getElementById("message").value
+    let lengthhh = message.length
+    console.log(lengthhh);
+    if(lengthhh<3){
+        document.getElementById("messagee").innerHTML= "<i>Enter a message</i>"
+        msgVal=false
+    }
+    else{
+        document.getElementById("messagee").innerHTML=""
+        msgVal=true
+    }
 }
 
 function isphone(){
   let number=document.getElementById("phone").value
   var regex = /^[0-9]+$/;
   var check = /^[0-9]{10}/;
-
+  let length = number.toString().length;
   var result = number.match(check);
-  console.log("yes")
-  console.log(result)
-  if(regex.test(number) &&result!= null)
+  
+ 
+  if(regex.test(number) &&result!= null && length==10)
   {
       document.getElementById("phonee").innerHTML=""
-      document.getElementById("submitb").style.visibility="visible"
+     
+      mobVal = true;
   }
   else{
       document.getElementById("phonee").innerHTML= "<i>Enter Valid Mobile</i>"
-      document.getElementById("submitb").style.visibility="hidden"
+     
+      mobVal = false;
   }
 }
 
-$("#submit-form").submit((e)=>{
-    e.preventDefault()
-    $.ajax({
-        url:"https://script.google.com/macros/s/AKfycbxTTa6qW0w-Fugi1acjrNOPZE3dnwDlAr5OGM8gLqB3diS32fR5-8hdLqdntFNN0185/exec",
-        data:$("#submit-form").serialize(),
-        method:"post",
-        success:function (response){
-            alert("Form submitted successfully")
-            window.location.reload()
-            //window.location.href="https://google.com"
-        },
-        error:function (err){
-            alert("Something Error")
+function isSubmit(){
+    if(nameVal==true && emailVal==true && subjectVal == true && msgVal == true && mobVal == true){
 
-        }
-    })
-})
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbxTTa6qW0w-Fugi1acjrNOPZE3dnwDlAr5OGM8gLqB3diS32fR5-8hdLqdntFNN0185/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
+        
+                }
+            })
+        })
+    }
+    else{
+        alert("please enter proper details")
+    }
+    
+
+}
+
